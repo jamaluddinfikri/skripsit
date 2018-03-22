@@ -1,5 +1,5 @@
 # base images
-FROM tobi312/rpi-nginx:alpine
+FROM tobi312/rpi-nginx
 
 # set maintainer
 LABEL maintainer "jamaluddin8157@gmail.com"
