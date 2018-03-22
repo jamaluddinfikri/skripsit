@@ -19,6 +19,7 @@ node {
          * For this example, we're using a Volkswagen-type approach ;-) */
 
         app.inside {
+            sh 'docker run --name test -p 80 -p 443 jamaluddinfikri/skripsit'
             sh 'echo "Tests passed"'
         }
     }
