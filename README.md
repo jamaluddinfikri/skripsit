@@ -1,0 +1,1 @@
+# skripsit iseng untuk skripsi
