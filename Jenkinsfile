@@ -16,7 +16,7 @@ node {
     stage('Test image') {
 
         app.inside {
-            sh 'docker run --name nginx -p 80  jamaluddinfikri/skripsit'
+            sh 'docker run --name nginx -d -p 80  jamaluddinfikri/skripsit'
             sh 'echo "Tests passed"'
         }
     }
