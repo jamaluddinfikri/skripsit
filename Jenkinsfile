@@ -2,21 +2,31 @@ node {
     def app
 
     stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
+        /* mengopy repo data */
 
         checkout scm
     }
 
     stage('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
+        /* membuat images dari Dockerfile */
 
         app = docker.build("jamaluddinfikri/skripsit")
     }
-    stage('Test image') {
+    stage('Run image') {
+        /* menjalankan images yang telah di buat */
 
         app.inside {
-            sh 'echo "Tests passed"'
+        docker.image('jamaluddinfikri/skripsit').withRun('-d -p 80:80')
+        sh 'curl localhost:80'
         }
+    }
+    stage('Pust image') {
+      /* push images ke docker hub */
+      
+       docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+       app.push("${env.BUILD_NUMBER}")
+       app.push("latest")
+
+       }
     }
 }
