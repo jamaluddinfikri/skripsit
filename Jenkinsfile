@@ -15,8 +15,9 @@ node {
     stage('Run image') {
         /* menjalankan images yang telah di buat */
 
-
-        sh 'curl localhost:80'
+        app.inside {
+           sh 'echo "Tests passed"'
+       }
 
     }
     stage('Pust image') {
