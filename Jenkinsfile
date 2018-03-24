@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* membuat images dari Dockerfile */
 
-        app = docker.build("jamaluddinfikri/skripsit")
+        app = docker.build("jamal008/skripsit")
     }
     stage('Run image') {
         /* menjalankan images yang telah di buat */
@@ -18,13 +18,16 @@ node {
         app.inside {
            sh 'echo "gass"'
        }
-       sh 'docker run -d -p 80:80 jamaluddinfikri/skripsit'
+       sh 'docker run -d -p 80:80 jamal008/skripsit'
 
     }
     stage('Pust image') {
       /* push images ke docker hub */
 
-       sh "docker push jamaluddinfikri/skripsit:${BUILD_NUMBER}"
+      docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+           app.push("${env.BUILD_NUMBER}")
+           app.push("latest")
+       }
 
   }
 }
