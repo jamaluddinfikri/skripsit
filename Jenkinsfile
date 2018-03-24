@@ -15,7 +15,7 @@ node {
     stage('Run image') {
         /* menjalankan images yang telah di buat */
 
-        try {
+        app.inside {
            sh 'docker run -d -p 80:80 jamaluddinfikri/skripsit'
            sh 'echo "gass"'
        }
