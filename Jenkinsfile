@@ -19,7 +19,7 @@ node {
          * For this example, we're using a Volkswagen-type approach ;-) */
 
         app.inside {
-           app = docker.image(jamaluddinfikri/skripsit).withRun(-d -p 80:80)
+           docker.image(jamaluddinfikri/skripsit).withRun(-d -p 80:80)
             sh 'curl localhost:80'
         }
     }
