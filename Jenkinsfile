@@ -24,8 +24,7 @@ node {
     stage('Pust image') {
       /* push images ke docker hub */
 
-      withDockerRegistry([credentialsId: 'DockerHub']) {
        sh "docker push jamaluddinfikri/skripsit:${BUILD_NUMBER}"
-    }
+
   }
 }
