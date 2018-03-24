@@ -2,31 +2,25 @@ node {
     def app
 
     stage('Clone repository') {
-        /* mengopy repo data */
+        /* Let's make sure we have the repository cloned to our workspace */
 
         checkout scm
     }
 
     stage('Build image') {
-        /* membuat images dari Dockerfile */
+        /* This builds the actual image; synonymous to
+         * docker build on the command line */
 
         app = docker.build("jamaluddinfikri/skripsit")
     }
+
     stage('Run image') {
-        /* menjalankan images yang telah di buat */
+        /* Ideally, we would run a test framework against our image.
+         * For this example, we're using a Volkswagen-type approach ;-) */
 
         app.inside {
-        docker.image('jamaluddinfikri/skripsit').withRun('-d -p 80:80')
-        sh 'curl localhost:80'
+           app = docker.image(jamaluddinfikri/skripsit).withRun(-d -p 80:80)
+            sh 'curl localhost:80'
         }
-    }
-    stage('Pust image') {
-      /* push images ke docker hub */
-      
-       docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-       app.push("${env.BUILD_NUMBER}")
-       app.push("latest")
-
-       }
     }
 }
