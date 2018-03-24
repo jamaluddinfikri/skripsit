@@ -1,9 +1,6 @@
 # base images
 FROM tobi312/rpi-nginx:alpine
 
-# set maintainer
-MAINTAINER jamaluddin fikri <jamaluddin8157@gmail.com>
-
 # copy file
 ADD conf/default.conf /etc/nginx/conf.d/
 
